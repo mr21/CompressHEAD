@@ -1,0 +1,7 @@
+*.exe
+*.depend
+*.layout
+*.html
+obj/
+css/
+js/
