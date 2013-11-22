@@ -6,16 +6,13 @@ char* getContent(char const* path) {
     char* content = NULL;
     if (f) {
         int size;
-        if (fseek(f, 0, SEEK_END) == 0) {
-            size = ftell(f);
-            if (size != -1 && (content = malloc(size + 1))) {
-                rewind(f);
-                if (fread(content, 1, size, f) == (unsigned)size) {
-                    content[size] = '\0';
-                } else {
-                    free(content);
-                    content = NULL;
-                }
+        if (fseek(f, 0, SEEK_END) == 0 && (size = ftell(f)) != -1 && (content = malloc(size + 1))) {
+            rewind(f);
+            if (fread(content, 1, size, f) == (unsigned)size) {
+                content[size] = '\0';
+            } else {
+                free(content);
+                content = NULL;
             }
         }
         fclose(f);
